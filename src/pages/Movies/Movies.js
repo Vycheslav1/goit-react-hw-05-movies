@@ -30,7 +30,7 @@ export function Movies() {
       )}`
     ).then(response => {
       setLoading(false);
-      localStorage.setItem('link', JSON.stringify(searchParams.get('query')));
+
       localStorage.setItem('show', JSON.stringify(true));
 
       localStorage.setItem('response', JSON.stringify(response));

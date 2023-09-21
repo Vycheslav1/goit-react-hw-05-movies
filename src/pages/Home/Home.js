@@ -11,7 +11,7 @@ import { NotFound } from 'pages/NotFound/NotFound';
 export default function Home() {
   const [isLoading, setLoading] = useState(true);
   localStorage.setItem('show', JSON.stringify(false));
-  localStorage.setItem('link', JSON.stringify(''));
+
   useEffect(() => {
     getMovies(
       `https://api.themoviedb.org/3/trending/all/day?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US&include_adult=false&page=1`
