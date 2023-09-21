@@ -39,8 +39,9 @@ const MovieDetails = () => {
     movie = JSON.parse(localStorage.getItem('response')).data.results.find(
       result => ':' + result.id === movieId.id
     );
+    // localStorage.setItem('respond', JSON.stringify(movie));
   } else {
-    movie = JSON.parse(localStorage.getItem('respond')).data.results[0];
+    movie = JSON.parse(localStorage.getItem('respond'));
   }
   const location = useLocation();
   const backLinkCast = location.state?.from ?? `/:${movie.id}/cast`;
