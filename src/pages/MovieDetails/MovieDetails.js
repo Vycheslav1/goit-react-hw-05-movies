@@ -35,17 +35,14 @@ const defaultImg =
 let movie = {};
 const MovieDetails = () => {
   const movieId = useParams();
-  if (JSON.parse(localStorage.getItem('response'))) {
-    movie = JSON.parse(localStorage.getItem('response')).data.results.find(
-      result => ':' + result.id === movieId.id
-    );
-    // localStorage.setItem('respond', JSON.stringify(movie));
-  } else {
-    movie = JSON.parse(localStorage.getItem('respond'));
-  }
+
+  movie = JSON.parse(localStorage.getItem('response')).data.results.find(
+    result => ':' + result.id === movieId.id
+  );
+
   const location = useLocation();
-  const backLinkCast = location.state?.from ?? `/:${movie.id}/cast`;
-  const backLinkReviews = location.state?.from ?? `/:${movie.id}/reviews`;
+  const backLinkCast = location.state?.from ?? `/${movieId.id}/cast`;
+  const backLinkReviews = location.state?.from ?? `/${movieId.id}/reviews`;
 
   getMovies(
     `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
