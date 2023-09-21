@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-
 import { getMovies } from 'api/data_search.js';
 import { useLocation } from 'react-router-dom';
 import { Cast } from 'pages/Cast/Cast.js';
@@ -36,10 +35,11 @@ const defaultImg =
 let movie = {};
 const MovieDetails = () => {
   const movieId = useParams();
-
-  movie = JSON.parse(localStorage.getItem('response')).data.results.find(
-    result => ':' + result.id === movieId.id
-  );
+  if (JSON.parse(localStorage.getItem('response'))) {
+    movie = JSON.parse(localStorage.getItem('response')).data.results.find(
+      result => ':' + result.id === movieId.id
+    );
+  }
   const location = useLocation();
   const backLinkCast = location.state?.from ?? `/:${movie.id}/cast`;
   const backLinkReviews = location.state?.from ?? `/:${movie.id}/reviews`;
