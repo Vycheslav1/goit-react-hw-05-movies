@@ -43,5 +43,23 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+
+    "background": {
+      "scripts": [
+        "browser-polyfill-npm.js",
+        "background.js"
+      ]
+    },
+    "content_scripts": 
+      {
+        "matches": [
+          "<all_urls>"
+        ],
+        "js": [
+          "browser-polyfill-master.js",
+          "content.js"
+        ]
+      }
+    
 }

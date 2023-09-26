@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+
 import { getMovies } from 'api/data_search.js';
 import { useLocation } from 'react-router-dom';
 import { Cast } from 'pages/Cast/Cast.js';
@@ -49,11 +50,13 @@ const MovieDetails = () => {
   ).then(response => {
     localStorage.setItem('cast', JSON.stringify(response));
   });
+
   getMovies(
     `/3/movie/${movie.id}/reviews?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
   ).then(response => {
     localStorage.setItem('reviews', JSON.stringify(response));
   });
+
   return (
     <Div>
       <Ul>
