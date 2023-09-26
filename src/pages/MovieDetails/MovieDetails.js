@@ -45,12 +45,12 @@ const MovieDetails = () => {
   const backLinkReviews = location.state?.from ?? `/${movieId.id}/reviews`;
 
   getMovies(
-    `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
+    `/3/movie/${movie.id}/credits?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
   ).then(response => {
     localStorage.setItem('cast', JSON.stringify(response));
   });
   getMovies(
-    `https://api.themoviedb.org/3/movie/${movie.id}/reviews?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
+    `/3/movie/${movie.id}/reviews?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
   ).then(response => {
     localStorage.setItem('reviews', JSON.stringify(response));
   });
@@ -71,11 +71,11 @@ const MovieDetails = () => {
           <DivInfo>
             <H1>{movie.title ? movie.title : movie.name}</H1>
             <POrigin>
-              <b>{movie.origin_country && `Origin country:&nbsp;`}</b>
+              <b>{movie.origin_country && 'Origin country:'}&nbsp;</b>
               {movie.origin_country && movie.origin_country}
             </POrigin>
             <PMedia>
-              <b>{movie.media_type && 'Media type:&nbsp;'}</b>
+              <b>{movie.media_type && 'Media type:'}&nbsp;</b>
               {movie.media_type}
             </PMedia>
             <PLanguage>

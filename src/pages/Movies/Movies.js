@@ -25,7 +25,7 @@ export function Movies() {
       return;
     }
     getMovies(
-      `https://api.themoviedb.org/3/search/movie?api_key=d0e55d9c3b81e26ea2922058fa861ca2&query=${searchParams.get(
+      `/3/search/movie?api_key=d0e55d9c3b81e26ea2922058fa861ca2&query=${searchParams.get(
         'query'
       )}`
     ).then(response => {
