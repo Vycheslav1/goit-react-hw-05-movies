@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { getMovies } from 'api/data_search.js';
 
@@ -12,12 +12,14 @@ export default function Home() {
   const [isLoading, setLoading] = useState(true);
   localStorage.setItem('show', JSON.stringify(false));
 
-  getMovies(
-    '/3/trending/all/day?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US&include_adult=false&page=1'
-  ).then(response => {
-    setLoading(false);
-    localStorage.setItem('response', JSON.stringify(response));
-  });
+  useEffect(() => {
+    getMovies(
+      '/3/trending/all/day?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US&include_adult=false&page=1'
+    ).then(response => {
+      setLoading(false);
+      localStorage.setItem('response', JSON.stringify(response));
+    });
+  }, []);
 
   return (
     <Div>
