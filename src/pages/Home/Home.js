@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes } from 'react-router-dom';
-import { MovieRoutes } from 'pages/MovieRoutes/MovieRoutes.js';
+
 import { getMovies } from 'api/data_search.js';
 
 import { Div, H1 } from 'pages/Home/HomeStyles.js';
@@ -27,12 +26,6 @@ export default function Home() {
       {!JSON.parse(localStorage.getItem('response')) && <NotFound />}
       <H1>Trending today</H1>
       {!isLoading && <MoviesList />}
-      <Routes>
-        {isLoading &&
-          JSON.parse(localStorage.getItem('response')).data.results.map(
-            result => MovieRoutes(result)
-          )}
-      </Routes>
     </Div>
   );
 }
