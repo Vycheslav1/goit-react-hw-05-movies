@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 import { MovieRoutes } from 'pages/MovieRoutes/MovieRoutes.js';
 import { getMovies } from 'api/data_search.js';
 
@@ -28,7 +28,6 @@ export default function Home() {
       <H1>Trending today</H1>
       {!isLoading && <MoviesList />}
       <Routes>
-        <Route path="/" element={<Home />} />
         {isLoading &&
           JSON.parse(localStorage.getItem('response')).data.results.map(
             result => MovieRoutes(result)

@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-//import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 //import { MovieRoutes } from 'pages/MovieRoutes/MovieRoutes.js';
 import { Movies } from 'pages/Movies/Movies.js';
 
@@ -12,6 +12,7 @@ export const App = () => {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
         </Route>
       </Routes>
