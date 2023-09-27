@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { MovieRoutes } from 'pages/MovieRoutes/MovieRoutes.js';
+//import { Routes, Route } from 'react-router-dom';
+//import { MovieRoutes } from 'pages/MovieRoutes/MovieRoutes.js';
 import { Movies } from 'pages/Movies/Movies.js';
 
 const Home = lazy(() => import('pages/Home/Home.js'));
