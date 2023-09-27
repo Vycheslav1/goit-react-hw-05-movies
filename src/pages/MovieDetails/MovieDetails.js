@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-
+import { useEffect } from 'react';
 import { getMovies } from 'api/data_search.js';
 import { useLocation } from 'react-router-dom';
 import { Cast } from 'pages/Cast/Cast.js';
@@ -38,25 +38,32 @@ let movie = {};
 const MovieDetails = () => {
   const movieId = useParams();
 
-  movie = JSON.parse(localStorage.getItem('response')).data.results.find(
-    result => ':' + result.id === movieId.id
-  );
+  JSON.parse(localStorage.getItem('response')).data.results.forEach(result => {
+    if (!movieId) {
+      return;
+    } else if (':' + result.id === movieId.id) {
+      movie = result;
+    }
+  });
 
   const location = useLocation();
+
   const backLinkCast = location.state?.from ?? `/${movieId.id}/cast`;
   const backLinkReviews = location.state?.from ?? `/${movieId.id}/reviews`;
 
-  getMovies(
-    `/3/movie/${movie.id}/credits?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
-  ).then(response => {
-    localStorage.setItem('cast', JSON.stringify(response));
-  });
+  useEffect(() => {
+    getMovies(
+      `/3/movie/${movie.id}/credits?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
+    ).then(response => {
+      localStorage.setItem('cast', JSON.stringify(response));
+    });
 
-  getMovies(
-    `/3/movie/${movie.id}/reviews?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
-  ).then(response => {
-    localStorage.setItem('reviews', JSON.stringify(response));
-  });
+    getMovies(
+      `/3/movie/${movie.id}/reviews?api_key=d0e55d9c3b81e26ea2922058fa861ca2&language=en-US`
+    ).then(response => {
+      localStorage.setItem('reviews', JSON.stringify(response));
+    });
+  }, []);
 
   return (
     <Div>
