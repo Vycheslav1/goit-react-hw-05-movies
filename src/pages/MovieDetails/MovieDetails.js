@@ -129,8 +129,8 @@ const MovieDetails = () => {
         </StyledLink>
       </NavDetails>
       <Routes>
-        <Route path="/cast/*" element={<Cast />} />
-        <Route path="/reviews/*" element={<Reviews />} />
+        <Route path="/cast/" element={<Cast />} />
+        <Route path="/reviews/" element={<Reviews />} />
       </Routes>
     </Div>
   );
