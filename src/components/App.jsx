@@ -13,9 +13,10 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="/" element={<Home />} />
-          {JSON.parse(localStorage.getItem('response')).data.results.map(
-            result => MovieRoutes(result)
-          )}
+          {JSON.parse(localStorage.getItem('response')) &&
+            JSON.parse(localStorage.getItem('response')).data.results.map(
+              result => MovieRoutes(result)
+            )}
           <Route path="/movies" element={<Movies />} />
         </Route>
       </Routes>
