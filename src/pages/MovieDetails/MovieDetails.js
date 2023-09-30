@@ -46,7 +46,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     if (!movieId || movieId.id === ':209867') {
-      navigate('/');
+      navigate('/movies');
       return;
     }
     getMovies(
