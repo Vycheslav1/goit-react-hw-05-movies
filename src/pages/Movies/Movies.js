@@ -1,28 +1,34 @@
 import { nanoid } from 'nanoid';
 
-import { Form, Input, Button, NavBack, StyledLink } from './MoviesStyles.js';
+import { NavBack, StyledLink } from './MoviesStyles.js';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovies } from 'api/data_search.js';
-import { MoviesList } from 'pages/MoviesList/MoviesList.js';
-
-const inputText = nanoid();
+import { MoviesList } from 'components/MoviesList/MoviesList.js';
+import { SearchForm } from 'components/SearchForm/SearchForm.js';
 const back = nanoid();
 
 export function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [isLoading, setLoading] = useState(false);
+  const [data, setData] = useState({
+    films: [],
+    isLoading: false,
+  });
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
   const handleSubmit = (e, value) => {
     e.preventDefault();
 
-    setLoading(true);
+    setData(prev => ({
+      ...prev,
+      isLoading: true,
+    }));
   };
+
   useEffect(() => {
-    if (!isLoading) {
+    if (!data.isLoading) {
       return;
     }
 
@@ -31,13 +37,13 @@ export function Movies() {
         'query'
       )}`
     ).then(response => {
-      setLoading(false);
-
-      localStorage.setItem('show', JSON.stringify(true));
-
-      localStorage.setItem('response', JSON.stringify(response));
+      setData(prev => ({
+        ...prev,
+        films: [...response.data.results],
+        isLoading: false,
+      }));
     });
-  }, [isLoading, searchParams]);
+  }, [data.isLoading, searchParams]);
 
   return (
     <div>
@@ -46,17 +52,10 @@ export function Movies() {
           Back
         </StyledLink>
       </NavBack>
-      <Form onSubmit={e => handleSubmit(e, e.target.value)}>
-        <Input
-          type="text"
-          id={inputText}
-          name="search"
-          placeholder="Search"
-          onChange={e => setSearchParams({ query: e.target.value })}
-        />
-        <Button type="submit">Search</Button>
-      </Form>
-      {!isLoading && JSON.parse(localStorage.getItem('show')) && <MoviesList />}
+      <SearchForm submitForm={handleSubmit} setParam={setSearchParams} />
+      {!data.isLoading && JSON.parse(localStorage.getItem('show')) && (
+        <MoviesList response={data.films} />
+      )}
     </div>
   );
 }

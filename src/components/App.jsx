@@ -1,11 +1,14 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { MovieRoutes } from 'pages/MovieRoutes/MovieRoutes.js';
+
+import { MovieDetails } from 'pages/MovieDetails/MovieDetails.js';
 import { Movies } from 'pages/Movies/Movies.js';
 
 const Home = lazy(() => import('pages/Home/Home.js'));
 
-const SharedLayout = lazy(() => import('./SharedLayout.js'));
+const SharedLayout = lazy(() =>
+  import('components/SharedLayout/SharedLayout.js')
+);
 
 export const App = () => {
   return (
@@ -13,11 +16,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route path="/" element={<Home />} />
-
-          {JSON.parse(localStorage.getItem('response')) &&
-            JSON.parse(localStorage.getItem('response')).data.results.map(
-              result => MovieRoutes(result)
-            )}
+          <Route path={`/:id//*`} element={<MovieDetails />} />
           <Route path="/movies" element={<Movies />} />
         </Route>
       </Routes>

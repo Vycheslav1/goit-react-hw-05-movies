@@ -12,6 +12,7 @@ export const Div = styled.div`
 export const NavDetails = styled.nav`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   gap: 20px;
 `;
 
@@ -63,7 +64,7 @@ export const H1 = styled.h1`
   color: #000;
 `;
 
-export const POrigin = styled.p`
+export const POrigin = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -77,7 +78,7 @@ export const POrigin = styled.p`
   color: #000;
 `;
 
-export const PMedia = styled.p`
+export const PMedia = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -91,7 +92,7 @@ export const PMedia = styled.p`
   color: #000;
 `;
 
-export const PLanguage = styled.p`
+export const PLanguage = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -105,7 +106,7 @@ export const PLanguage = styled.p`
   color: #000;
 `;
 
-export const POverview = styled.p`
+export const POverview = styled.span`
   display: flex;
   margin-top: 20px;
   width: 800px;
@@ -119,7 +120,7 @@ export const POverview = styled.p`
   color: #000;
 `;
 
-export const PPopularity = styled.p`
+export const PPopularity = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -133,7 +134,7 @@ export const PPopularity = styled.p`
   color: #000;
 `;
 
-export const PRelease = styled.p`
+export const PRelease = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -147,7 +148,7 @@ export const PRelease = styled.p`
   color: #000;
 `;
 
-export const PAverage = styled.p`
+export const PAverage = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -161,7 +162,7 @@ export const PAverage = styled.p`
   color: #000;
 `;
 
-export const PCount = styled.p`
+export const PCount = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;
@@ -174,7 +175,20 @@ export const PCount = styled.p`
   letter-spacing: 0.06em;
   color: #000;
 `;
-export const PInfo = styled.p`
+export const PInfo = styled.span`
+  display: flex;
+  margin-top: 20px;
+  width: auto;
+  height: auto;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  color: #000;
+`;
+export const PGenres = styled.span`
   display: flex;
   margin-top: 20px;
   width: auto;

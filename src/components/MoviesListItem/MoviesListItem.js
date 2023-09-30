@@ -1,4 +1,5 @@
 import { StyledLink } from './MoviesListItemStyles.js';
+
 import PropTypes from 'prop-types';
 
 export const MoviesListItem = ({ id, name, title }) => {
