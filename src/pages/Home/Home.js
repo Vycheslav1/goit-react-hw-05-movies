@@ -6,8 +6,6 @@ import { Div, H1 } from 'pages/Home/HomeStyles.js';
 
 import { MoviesList } from 'components/MoviesList/MoviesList.js';
 
-import { NotFound } from 'pages/NotFound/NotFound';
-
 export default function Home() {
   const [data, setData] = useState({
     films: [],
@@ -28,7 +26,6 @@ export default function Home() {
 
   return (
     <Div>
-      {!JSON.parse(localStorage.getItem('response')) && <NotFound />}
       <H1>Trending today</H1>
       {!data.isLoading && <MoviesList response={data.films} />}
     </Div>

@@ -53,9 +53,7 @@ export function Movies() {
         </StyledLink>
       </NavBack>
       <SearchForm submitForm={handleSubmit} setParam={setSearchParams} />
-      {!data.isLoading && JSON.parse(localStorage.getItem('show')) && (
-        <MoviesList response={data.films} />
-      )}
+      {!data.isLoading && <MoviesList response={data.films} />}
     </div>
   );
 }
