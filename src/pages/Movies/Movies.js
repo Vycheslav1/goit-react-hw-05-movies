@@ -1,13 +1,8 @@
-import { nanoid } from 'nanoid';
-
-import { NavBack, StyledLink } from './MoviesStyles.js';
-import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovies } from 'api/data_search.js';
 import { MoviesList } from 'components/MoviesList/MoviesList.js';
 import { SearchForm } from 'components/SearchForm/SearchForm.js';
-const back = nanoid();
 
 export function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,25 +11,26 @@ export function Movies() {
     films: [],
     isLoading: false,
   });
-  const location = useLocation();
-  const backLink = location.state?.from ?? '/';
+
   const handleSubmit = (e, value) => {
     e.preventDefault();
-
+    console.log(value);
     setData(prev => ({
       ...prev,
       isLoading: true,
     }));
+    localStorage.setItem('param', JSON.stringify(value));
   };
+  localStorage.setItem('link', JSON.stringify(1));
 
   useEffect(() => {
-    if (!data.isLoading) {
+    if (!data.isLoading && !JSON.parse(localStorage.getItem('flag'))) {
       return;
     }
 
     getMovies(
-      `/3/search/movie?api_key=d0e55d9c3b81e26ea2922058fa861ca2&query=${searchParams.get(
-        'query'
+      `/3/search/movie?api_key=d0e55d9c3b81e26ea2922058fa861ca2&query=${JSON.parse(
+        localStorage.getItem('param')
       )}`
     ).then(response => {
       setData(prev => ({
@@ -43,16 +39,15 @@ export function Movies() {
         isLoading: false,
       }));
     });
-  }, [data.isLoading, searchParams]);
+  }, [data.isLoading, data.films]);
 
   return (
     <div>
-      <NavBack>
-        <StyledLink key={back} to={backLink}>
-          Back
-        </StyledLink>
-      </NavBack>
-      <SearchForm submitForm={handleSubmit} setParam={setSearchParams} />
+      <SearchForm
+        submitForm={handleSubmit}
+        setParam={setSearchParams}
+        search={searchParams}
+      />
       {!data.isLoading && <MoviesList response={data.films} />}
     </div>
   );

@@ -22,7 +22,16 @@ export const Img = styled.img`
   height: auto;
   object-fit: cover;
 `;
-
+export const StyledBack = styled(NavLink)`
+  font-family: 'Roboto';
+  margin-left: 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  color: black;
+`;
 export const StyledLink = styled(NavLink)`
   font-family: 'Roboto';
   display: list-item;

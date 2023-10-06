@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 
 export const MoviesListItem = ({ id, name, title }) => {
   return (
-    <StyledLink key={id} to={`/:${id}`}>
+    <StyledLink
+      key={id}
+      to={
+        JSON.parse(localStorage.getItem('link')) ? `/movies/:${id}` : `/:${id}`
+      }
+    >
       {name ? name : title}
     </StyledLink>
   );

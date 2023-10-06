@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMovies } from 'api/data_search.js';
 import { useLocation } from 'react-router-dom';
-import { Cast } from 'pages/Cast/Cast.js';
-import { Reviews } from 'pages/Reviews/Reviews.js';
+import Cast from 'components/Cast/Cast.js';
+import Reviews from 'components/Reviews/Reviews.js';
 
 import {
   StyledLink,
+  StyledBack,
   Div,
   Ul,
   Li,
@@ -27,15 +30,13 @@ import {
   Img,
 } from 'pages/MovieDetails/MovieDetailsStyles.js';
 
-import { Routes, Route } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 const identCast = nanoid();
 const identReview = nanoid();
 
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
-const MovieDetails = () => {
+export default function MovieDetails() {
   const movieId = useParams();
   const navigate = useNavigate();
 
@@ -44,9 +45,15 @@ const MovieDetails = () => {
     isLoading: true,
   });
 
+  localStorage.setItem('flag', JSON.stringify(true));
   useEffect(() => {
-    if (!movieId || movieId.id === ':209867') {
-      navigate('/movies');
+    if (
+      !movieId ||
+      movieId.id === ':96677' ||
+      movieId.id === ':114461' ||
+      movieId.id === ':234239'
+    ) {
+      navigate('/');
       return;
     }
     getMovies(
@@ -64,13 +71,25 @@ const MovieDetails = () => {
   }, [data.films, movieId, navigate]);
   const location = useLocation();
 
-  const backLinkCast =
-    location.state?.from ?? `/${movieId.id.replace(':', '')}/cast`;
-  const backLinkReviews =
-    location.state?.from ?? `/${movieId.id.replace(':', '')}/reviews`;
+  const backLinkCast = window.location.href.split('/').includes('movies')
+    ? location.state?.from ?? `/movies/${movieId.id.replace(':', '')}/cast`
+    : location.state?.from ?? `/${movieId.id.replace(':', '')}/cast`;
+  const backLinkReviews = window.location.href.split('/').includes('movies')
+    ? location.state?.from ?? `/movies/${movieId.id.replace(':', '')}/reviews`
+    : location.state?.from ?? `/${movieId.id.replace(':', '')}/reviews`;
 
   return (
     <Div>
+      <NavDetails>
+        <StyledBack
+          to={
+            window.location.href.split('/').includes('movies') ? '/movies' : `/`
+          }
+          state={{ from: location }}
+        >
+          Go Back
+        </StyledBack>
+      </NavDetails>
       {!data.isLoading && (
         <Ul>
           <Li>
@@ -154,6 +173,4 @@ const MovieDetails = () => {
       </Routes>
     </Div>
   );
-};
-
-export { MovieDetails };
+}

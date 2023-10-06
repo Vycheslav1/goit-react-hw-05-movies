@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { getMovies } from 'api/data_search.js';
-import { Div, Ul, NavDetails, StyledLink } from './ReviewsStyles.js';
-import { ReviewItem } from 'pages/ReviewItem/ReviewItem.js';
-import { MovieDetails } from 'pages/MovieDetails/MovieDetails.js';
-import { nanoid } from 'nanoid';
-import { Routes, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
-const back = nanoid();
+import { Div, Ul } from './ReviewsStyles.js';
+import { ReviewItem } from 'components/ReviewItem/ReviewItem.js';
 
-export const Reviews = ({ filmId }) => {
+import { NotFoundReviews } from 'components/NotFoundReviews/NotFoundReviews.js';
+
+import PropTypes from 'prop-types';
+
+export default function Reviews({ filmId }) {
   const [data, setData] = useState({
     films: [],
     isLoading: true,
@@ -26,20 +25,13 @@ export const Reviews = ({ filmId }) => {
   }, [data.films, filmId]);
   return (
     <Div>
-      <NavDetails>
-        <StyledLink key={back} to={`/:${filmId}`}>
-          Back
-        </StyledLink>
-      </NavDetails>
-      <Routes>
-        <Route path="/:id" element={<MovieDetails />} />
-      </Routes>
       <Ul>
         {!data.isLoading && data.films[0].map(review => ReviewItem(review))}
+        {!data.isLoading && !data.films[0].length && <NotFoundReviews />}
       </Ul>
     </Div>
   );
-};
+}
 Reviews.propTypes = {
   filmId: PropTypes.string.isRequired,
 };

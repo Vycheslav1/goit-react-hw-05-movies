@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Input, Button } from './SearchFormStyles.js';
 const inputText = nanoid();
 export const SearchForm = ({ submitForm, setParam }) => (
-  <Form onSubmit={e => submitForm(e, e.target.value)}>
+  <Form onSubmit={e => submitForm(e, document.getElementById(inputText).value)}>
     <Input
       type="text"
       id={inputText}
