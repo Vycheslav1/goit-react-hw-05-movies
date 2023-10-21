@@ -32,7 +32,7 @@ import {
 
 const identCast = nanoid();
 const identReview = nanoid();
-
+let movie;
 const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
@@ -46,29 +46,34 @@ export default function MovieDetails() {
   });
 
   localStorage.setItem('flag', JSON.stringify(true));
-  useEffect(() => {
-    if (
-      !movieId ||
-      movieId.id === ':96677' ||
-      movieId.id === ':114461' ||
-      movieId.id === ':234239'
-    ) {
-      navigate('/');
-      return;
-    }
-    getMovies(
-      `/3/movie/${movieId.id.replace(
-        ':',
-        ''
-      )}?api_key=d0e55d9c3b81e26ea2922058fa861ca2`
-    ).then(response => {
-      setData(prev => ({
-        ...prev,
-        films: [response.data],
-        isLoading: false,
-      }));
-    });
-  }, [data.films, movieId, navigate]);
+  useEffect(
+    () => {
+      getMovies(
+        `/3/movie/${movieId.id.replace(
+          ':',
+          ''
+        )}?api_key=d0e55d9c3b81e26ea2922058fa861ca2`
+      )
+        .then(response => {
+          setData(prev => ({
+            ...prev,
+            films: [response.data],
+            isLoading: false,
+          }));
+        })
+        .catch(err => {
+          if (err.response) {
+            navigate('/');
+          } else if (err.request) {
+            navigate('/');
+          } else {
+            navigate('/');
+          }
+        });
+    },
+    [data.films, movieId, navigate],
+    movie
+  );
   const location = useLocation();
 
   const backLinkCast = window.location.href.split('/').includes('movies')

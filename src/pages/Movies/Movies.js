@@ -14,7 +14,7 @@ export function Movies() {
 
   const handleSubmit = (e, value) => {
     e.preventDefault();
-    console.log(value);
+    setSearchParams({ query: value });
     setData(prev => ({
       ...prev,
       isLoading: true,

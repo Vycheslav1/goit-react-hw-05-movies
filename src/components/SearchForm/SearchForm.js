@@ -4,13 +4,7 @@ import { Form, Input, Button } from './SearchFormStyles.js';
 const inputText = nanoid();
 export const SearchForm = ({ submitForm, setParam }) => (
   <Form onSubmit={e => submitForm(e, document.getElementById(inputText).value)}>
-    <Input
-      type="text"
-      id={inputText}
-      name="search"
-      placeholder="Search"
-      onChange={e => setParam({ query: e.target.value })}
-    />
+    <Input type="text" id={inputText} name="search" placeholder="Search" />
     <Button type="submit">Search</Button>
   </Form>
 );
