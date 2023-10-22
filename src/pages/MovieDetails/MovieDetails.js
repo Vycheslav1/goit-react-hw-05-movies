@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMovies } from 'api/data_search.js';
 import { useLocation } from 'react-router-dom';
-import Cast from 'components/Cast/Cast.js';
-import Reviews from 'components/Reviews/Reviews.js';
-
+//import Cast from 'components/Cast/Cast.js';
+//import Reviews from 'components/Reviews/Reviews.js';
 import {
   StyledLink,
   StyledBack,
@@ -29,6 +29,8 @@ import {
   NavDetails,
   Img,
 } from 'pages/MovieDetails/MovieDetailsStyles.js';
+const Reviews = lazy(() => import('components/Reviews/Reviews.js'));
+const Cast = lazy(() => import('components/Cast/Cast.js'));
 
 const identCast = nanoid();
 const identReview = nanoid();
@@ -166,16 +168,19 @@ export default function MovieDetails() {
           Reviews
         </StyledLink>
       </NavDetails>
-      <Routes>
-        <Route
-          path="/cast//*"
-          element={<Cast filmId={movieId.id.replace(':', '')} />}
-        />
-        <Route
-          path="/reviews//*"
-          element={<Reviews filmId={movieId.id.replace(':', '')} />}
-        />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route
+            path="/cast//*"
+            element={<Cast filmId={movieId.id.replace(':', '')} />}
+          />
+
+          <Route
+            path="/reviews//*"
+            element={<Reviews filmId={movieId.id.replace(':', '')} />}
+          />
+        </Routes>
+      </Suspense>
     </Div>
   );
 }

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-
+import { lazy } from 'react';
 import { getMovies } from 'api/data_search.js';
 
 import { Div, H1 } from 'pages/Home/HomeStyles.js';
-
-import { MoviesList } from 'components/MoviesList/MoviesList.js';
+//import { MoviesList } from 'components/MoviesList/MoviesList.js';
+const MoviesList = lazy(() => import('components/MoviesList/MoviesList.js'));
 
 export default function Home() {
   const [data, setData] = useState({

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Div, Ul } from './CastStyles';
 import { CastItem } from 'components/CastItem/CastItem.js';
-
 import { getMovies } from 'api/data_search.js';
 import { NotFoundCast } from 'components/NotFoundCast/NotFoundCast.js';
 

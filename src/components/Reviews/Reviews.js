@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { getMovies } from 'api/data_search.js';
 import { Div, Ul } from './ReviewsStyles.js';
 import { ReviewItem } from 'components/ReviewItem/ReviewItem.js';
-
 import { NotFoundReviews } from 'components/NotFoundReviews/NotFoundReviews.js';
 
 import PropTypes from 'prop-types';
