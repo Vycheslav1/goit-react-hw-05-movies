@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getMovies } from 'api/data_search.js';
-//import { MoviesList } from 'components/MoviesList/MoviesList.js';
+
 import { SearchForm } from 'components/SearchForm/SearchForm.js';
 const MoviesList = lazy(() => import('components/MoviesList/MoviesList.js'));
 
-export function Movies() {
+export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [data, setData] = useState({

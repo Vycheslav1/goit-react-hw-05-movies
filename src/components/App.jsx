@@ -1,10 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import SharedLayout from './SharedLayout/SharedLayout';
-import { Movies } from 'pages/Movies/Movies.js';
 
 const Home = lazy(() => import('pages/Home/Home.js'));
 const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails.js'));
+const Movies = lazy(() => import('pages/Movies/Movies.js'));
 
 export const App = () => {
   return (
